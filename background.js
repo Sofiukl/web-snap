@@ -32,14 +32,22 @@ var rule3 = {
       ],
       actions: [ new chrome.declarativeContent.ShowPageAction() ]
   };
+  
+  var rule4 = {
+      conditions: [
+        new chrome.declarativeContent.PageStateMatcher({
+          pageUrl: { hostEquals: 'localhost', schemes: ['http'] }
+        })
+      ],
+      actions: [ new chrome.declarativeContent.ShowPageAction() ]
+  };
 
  chrome.runtime.onInstalled.addListener(function(details) {
-      chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-        chrome.declarativeContent.onPageChanged.addRules([rule1, rule2, rule3]);
+     chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
+       chrome.declarativeContent.onPageChanged.addRules([rule1, rule2, rule3, rule4]);
       });
   });
-
-
+  
 /**
 setting variables to the chrome storage
 
